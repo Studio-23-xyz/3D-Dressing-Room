@@ -109,8 +109,8 @@ public class Material_Menu_Manager : MonoBehaviour
         }
         else if (id == 3)
         {
-            smoothness = 0.15f;
-            metallic = 0.36f;
+            smoothness = 0.4f;
+            metallic = 0.3f;
         }
 
         shirtRenderer.material.SetFloat("_Smoothness", smoothness);
@@ -136,6 +136,10 @@ public class Material_Menu_Manager : MonoBehaviour
                     shirtRenderer.material.SetTexture("_BumpMap", tex);
                 });
             }
+
+            var shirtRenderer = shirtMaterial.GetComponent<Renderer>();
+            shirtRenderer.material.shaderKeywords = new string[1] { "_NORMALMAP" };
+            shirtRenderer.material.SetTexture("_BumpMap", clothTexture[0]);
         }
         else if (Id == 1)
         {
@@ -153,6 +157,9 @@ public class Material_Menu_Manager : MonoBehaviour
                     shirtRenderer.material.SetTexture("_BumpMap", tex);
                 });
             }
+            var shirtRenderer = shirtMaterial.GetComponent<Renderer>();
+            shirtRenderer.material.shaderKeywords = new string[1] { "_NORMALMAP" };
+            shirtRenderer.material.SetTexture("_BumpMap", leatherTexture[0]);
         }
         
     }
