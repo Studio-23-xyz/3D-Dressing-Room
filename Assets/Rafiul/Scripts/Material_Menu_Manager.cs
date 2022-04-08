@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Material_Menu_Manager : MonoBehaviour
 {
+    public GameObject colorButton;
+    public GameObject textureButton;
     public RectTransform menuRoot;
     public RectTransform matMenuRoot;
     public RectTransform contentPanelRoot;
@@ -41,6 +43,7 @@ public class Material_Menu_Manager : MonoBehaviour
     public void ToggleMenu()
     {
         isOpen = !isOpen;
+        colorButton.SetActive(!isOpen);
         float positionXToMove = isOpen ? 60f : 800f;
         menuRoot.DOAnchorPosX(positionXToMove, 1f);
     }
@@ -48,6 +51,7 @@ public class Material_Menu_Manager : MonoBehaviour
     public void ToggleMatMenu()
     {
         matOpen = !matOpen;
+        textureButton.SetActive(!matOpen);
         float positionXToMove = matOpen ? -40f : -800f;
         matMenuRoot.DOAnchorPosX(positionXToMove, 1f);
     }
