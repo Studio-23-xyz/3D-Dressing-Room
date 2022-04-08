@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,7 @@ public class Material_Menu_Manager : MonoBehaviour
     public List<Texture2D> leatherTexture;
     public GameObject texturePrefab;
     public RectTransform texturePanelRoot;
+    public Sprite mySprite;
 
     private bool isOpen;
     private bool matOpen;
@@ -82,7 +84,8 @@ public class Material_Menu_Manager : MonoBehaviour
         // 3 for Rubber
 
         var shirtRenderer = shirtMaterial.GetComponent<Renderer>();
-        shirtRenderer.material.SetTexture("_BaseMap", null);
+        shirtRenderer.material.shaderKeywords = new string[1] { "_NORMALMAP" };
+        shirtRenderer.material.SetTexture("_BumpMap", null);
         float smoothness = 0f;
         float metallic = 0f;
         ClearTextureList();
@@ -119,31 +122,35 @@ public class Material_Menu_Manager : MonoBehaviour
     {
         if (Id == 0)
         {
+            int i = 1;
             foreach (Texture2D tex in clothTexture)
             {
-                Sprite s = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f),
-                    100.0f);
                 GameObject g = Instantiate(texturePrefab, texturePanelRoot);
-                g.GetComponent<Image>().sprite = s;
+                g.GetComponent<Image>().color = Color.grey;
+                g.GetComponentInChildren<TextMeshProUGUI>().text = $"{i}";
+                i++;
                 g.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     var shirtRenderer = shirtMaterial.GetComponent<Renderer>();
-                    shirtRenderer.material.SetTexture("_BaseMap",tex);
+                    shirtRenderer.material.shaderKeywords = new string[1] {"_NORMALMAP"};
+                    shirtRenderer.material.SetTexture("_BumpMap", tex);
                 });
             }
         }
         else if (Id == 1)
         {
+            int i = 1;
             foreach (Texture2D tex in leatherTexture)
             {
-                Sprite s = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f),
-                    100.0f);
                 GameObject g = Instantiate(texturePrefab, texturePanelRoot);
-                g.GetComponent<Image>().sprite = s;
+                g.GetComponent<Image>().color = Color.grey;
+                g.GetComponentInChildren<TextMeshProUGUI>().text = $"{i}";
+                i++;
                 g.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     var shirtRenderer = shirtMaterial.GetComponent<Renderer>();
-                    shirtRenderer.material.SetTexture("_BaseMap", tex);
+                    shirtRenderer.material.shaderKeywords = new string[1] { "_NORMALMAP" };
+                    shirtRenderer.material.SetTexture("_BumpMap", tex);
                 });
             }
         }
